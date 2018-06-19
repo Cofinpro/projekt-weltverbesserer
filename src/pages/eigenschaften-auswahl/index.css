@@ -1,0 +1,15 @@
+.Eigenschaften-Image{
+  height: 40%;
+  display: block;
+  margin-left: 300px;
+  margin-right: auto;
+  width: 40%;
+}
+
+.img-circle {
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+
+.top-buffer { margin-top:40px; }
