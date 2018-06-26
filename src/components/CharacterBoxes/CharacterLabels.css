@@ -1,0 +1,23 @@
+.Character{
+    height: 100px;
+    width: 200px;
+    background-color: blue;
+    border-radius: 50px;
+    align-items: baseline;
+    font-size: 80;
+    
+
+}
+
+.Character-logo{
+    height: 100px;
+    vertical-align: center;
+    border-radius: 50px;
+    margin-left: -50px;
+
+}
+
+.CharacterLabel{
+    margin-top: -60px;
+    
+}
