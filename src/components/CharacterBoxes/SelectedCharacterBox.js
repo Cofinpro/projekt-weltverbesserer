@@ -7,7 +7,7 @@ class SelectedCharacterBox extends Component {
 
         return (
             <div>
-                <img src={this.props.Image} className="Character-logo" alt="logodrei" />
+                <img src={this.props.Image} className="Character-logo" alt="logodrei" onClick={() => this.props.onClick()}/>
 
                 <label className="CharacterLabel">
                     {this.props.Name}
