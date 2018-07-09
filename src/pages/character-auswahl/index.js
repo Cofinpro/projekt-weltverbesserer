@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import CharacterBox from "../../components/CharacterBoxes/CharacterBox";
 import { Characters } from "./Characters";
 import SelectedCharacterBox from "../../components/CharacterBoxes/SelectedCharacterBox";
+import ArrowDown from "../../img/icon_arrow_dotted_down_orange.svg";
+import ArrowUp from "../../img/icon_arrow_dotted_up_orange.svg";
+import "./style.css"
 
 
 class Character extends Component {
@@ -61,7 +64,7 @@ class Character extends Component {
         if (toRemove === this.state.prio3) {
             this.setState({ prio3: null }, () => this.orderPrios());
         }
-        
+
 
 
     }
@@ -91,7 +94,9 @@ class Character extends Component {
         var characters = this.state.characters.sort((a, b) => a.Key - b.Key).map((character) => {
             return (
                 <div key={character.Key}>
-                    <CharacterBox image={character.Image} character={character.Name} onClick={() => this.handleClick(character)} />
+                    <div className='characters'>
+                        <CharacterBox image={character.Image} character={character.Name} onClick={() => this.handleClick(character)} />
+                    </div>
                 </div>
             )
         })
@@ -101,7 +106,7 @@ class Character extends Component {
     renderSelectedCharacters(selectedCharacter) {
         if (!selectedCharacter) {
             return (
-                <div>
+                <div className='selectedCharacters'>
                     Bitte Charakter auswählen
                  </div>
             );
@@ -120,36 +125,72 @@ class Character extends Component {
             infinite: true,
             speed: 500,
             slidesToShow: 3,
-            slidesToScroll: 1
+            slidesToScroll: 1,
         };
 
 
 
         return (
+
             <div className='content container' >
-                <div class="row">
-                    <div class="col-sm">
-                        <Slider {...settings}>
-                            {this.renderCharacters()}
-                        </Slider>
+                <Slider {...settings}>
+                    {this.renderCharacters()}
+                </Slider>
+                <div className='content container' >
+                    <div className='row'>
+                        <div class='col-sm' />
+                        <div class='col-4 text-center'>
+                            Prio 1
+                        </div>
+                        <div class='col-sm' >
+                        </div>
                     </div>
-                </div>
-                <div>
-                    prio 1
-                    {this.renderSelectedCharacters(this.state.prio1)}
-                </div>
-                <div>
-                    prio 2
-                    {this.renderSelectedCharacters(this.state.prio2)}
-                </div>
-                <div>
-                    prio 3
-                    {this.renderSelectedCharacters(this.state.prio3)}
+                    <div className='row'>
+                        <div class='col-sm' />
+                        <div class='col-4 text-center'>
+                            {this.renderSelectedCharacters(this.state.prio1)}
+                        </div>
+                        <div class='col-sm' >
+                            {/* <img src={ArrowDown} alt="logodrei" className="arrowImages" onClick={this.handlePrioDown}/> */}
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div class='col-sm' />
+                        <div class='col-4 text-center'>
+                            Prio 2
+
+                        </div>
+                        <div class='col-sm ' />
+                    </div>
+                    <div className='row'>
+                        <div class='col-sm' />
+                        <div class='col-4 text-center'>
+
+                            {this.renderSelectedCharacters(this.state.prio2)}
+                        </div>
+                        <div class='col-sm '/>
+                    </div>
+                    <div className='row'>
+                        <div class='col-sm' />
+                        <div class='col-4 text-center'>
+                            Prio 3
+                        </div>
+                        <div class='col-sm' />
+                    </div>
+                    <div className='row'>
+                        <div class='col-sm' />
+                        <div class='col-4 text-center'>
+                            {this.renderSelectedCharacters(this.state.prio3)}
+                        </div>
+                        <div class='col-sm'>
+                            {/* <img src={ArrowUp} alt="logodrei" className="arrowImages" /> */}
+                        </div>
+                    </div>
                 </div>
                 <row>
                     <a href="/eigenschaften" class="btn btn-outline-secondary float-right" role="button">Weiter</a>
                 </row>
-            </div>
+            </div >
         );
     }
 }

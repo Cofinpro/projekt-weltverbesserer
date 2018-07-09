@@ -1,9 +1,9 @@
-import Planer from '../../img/Planer.jpg';
-import Visionaer from '../../img/Visionaer.jpg';
-import Checker from '../../img/Checker.jpg';
-import Energiebuendel from '../../img/Energiebuendel.jpg';
-import Kommunikator from '../../img/Kommunikator.jpg';
-import Macher from '../../img/Macher.jpg';
+import Planer from '../../img/Planer.svg';
+import Visionaer from '../../img/Visionaer.svg';
+import Checker from '../../img/Checker.svg';
+import Energiebuendel from '../../img/Energiebuendel.svg';
+import Kommunikator from '../../img/Kommunikator.svg';
+import Macher from '../../img/Macher.svg';
 
 
 export const Characters = {

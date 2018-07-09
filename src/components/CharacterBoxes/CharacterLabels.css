@@ -13,11 +13,13 @@
     height: 100px;
     vertical-align: center;
     border-radius: 50px;
-    margin-left: -50px;
-
-}
+    }
 
 .CharacterLabel{
     margin-top: -60px;
     
+}
+
+h1{
+font-size: initial
 }

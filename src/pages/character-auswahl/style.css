@@ -1,0 +1,23 @@
+.characters {
+  border: 3px dashed orange;
+  margin-left: 40px;
+  -webkit-border-image: none;
+  -o-border-image: none;
+  border-image: none;
+}
+
+.selectedCharacters {
+  border: 3px solid blue;
+  margin-top: 10px;
+}
+
+.arrowImages{
+  vertical-align: bottom;
+}
+.arrowUpImages{
+  vertical-align: 100px;
+  border: 3px dashed orange;
+}
+.arrowDownImages{
+  vertical-align: 1000px;
+}
