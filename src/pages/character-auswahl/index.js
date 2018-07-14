@@ -23,35 +23,30 @@ class Character extends Component {
     }
 
     handleClick(toSetPrio) {
-
+        if (this.characterIsSelected(toSetPrio)) {
+            return
+        }
         if (!this.state.prio1) {
             this.setState({ prio1: toSetPrio });
-            this.removeCharacterFromList(toSetPrio)
-        } else {
-            if (!this.state.prio2) {
-                this.setState({ prio2: toSetPrio });
-                this.removeCharacterFromList(toSetPrio)
-            } else {
-                if (!this.state.prio3) {
-                    this.setState({ prio3: toSetPrio });
-                    this.removeCharacterFromList(toSetPrio)
-                }
-            }
+            return
         }
+        if (!this.state.prio2) {
+            this.setState({ prio2: toSetPrio });
+            return
+        }
+        if (!this.state.prio3) {
+            this.setState({ prio3: toSetPrio });
+            return
+        }
+
     }
 
 
-    removeCharacterFromList(toRemove) {
-        var newCharacters = [...this.state.characters];
-        var index = newCharacters.indexOf(toRemove)
-        newCharacters.splice((index), 1);
-        this.setState({ characters: newCharacters });
+    characterIsSelected(character) {
+        return character === this.state.prio1 || character === this.state.prio2 || character === this.state.prio3
     }
 
     removeSelectedCharacter(toRemove) {
-        var newCharacters = [...this.state.characters];
-        newCharacters.push(toRemove);
-        this.setState({ characters: newCharacters });
 
         if (toRemove === this.state.prio1) {
             this.setState({ prio1: null }, () => this.orderPrios());
@@ -70,19 +65,14 @@ class Character extends Component {
     }
 
     orderPrios() {
-        console.log('aufgerufen empty')
-        console.log(this.state.prio1)
-        console.log(this.state.prio2)
-        console.log(this.state.prio3)
+
         if (!this.state.prio1) {
-            console.log('prio1 empty')
             this.setState({ prio1: this.state.prio2 });
             this.setState({ prio2: this.state.prio3 });
             this.setState({ prio3: null })
         }
 
         if (!this.state.prio2) {
-            console.log('prio2 empty')
             this.setState({ prio2: this.state.prio3 });
             this.setState({ prio3: null })
         }
@@ -92,10 +82,16 @@ class Character extends Component {
 
     renderCharacters() {
         var characters = this.state.characters.sort((a, b) => a.Key - b.Key).map((character) => {
+            const isSelected = this.characterIsSelected(character)
             return (
                 <div key={character.Key}>
-                    <div className='characters'>
-                        <CharacterBox image={character.Image} character={character.Name} onClick={() => this.handleClick(character)} />
+                    <div>
+                        {isSelected ? (
+                            <CharacterBox image={character.Image} character={character.Name} onClick={() => this.handleClick(character)} additionalStyleClass='shake'/>
+                        ) : (
+                                <CharacterBox image={character.Image} character={character.Name} onClick={() => this.handleClick(character)} />
+                            )
+                        }
                     </div>
                 </div>
             )
@@ -158,7 +154,7 @@ class Character extends Component {
                         <div class='col-sm' />
                         <div class='col-4 text-center'>
                             Prio 2
-
+    
                         </div>
                         <div class='col-sm ' />
                     </div>
@@ -168,7 +164,7 @@ class Character extends Component {
 
                             {this.renderSelectedCharacters(this.state.prio2)}
                         </div>
-                        <div class='col-sm '/>
+                        <div class='col-sm ' />
                     </div>
                     <div className='row'>
                         <div class='col-sm' />
