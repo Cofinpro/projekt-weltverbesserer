@@ -1,18 +1,13 @@
 .character-Box{
     border: 3px dashed orange;
-    margin-left: 30px;
-    margin-right: 30px;
-    
-    
-}
+    margin-left: 10%;
+  }
 
-.check-image{
-    align-items: flex-start;
-}
+  .text-Box{
+      height:125px;
+      font-size: 3vmin;
+  }
 
-.selected-background{
-    background-color: lightgray;
-}
 .shake{
     animation: App-logo-spin  0.5s; ;
     animation-iteration-count: infinite; 

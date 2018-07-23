@@ -5,7 +5,8 @@ import { Characters } from "./Characters";
 import SelectedCharacterBox from "../../components/CharacterBoxes/SelectedCharacterBox";
 import ArrowDown from "../../img/icon_arrow_dotted_down_orange.svg";
 import ArrowUp from "../../img/icon_arrow_dotted_up_orange.svg";
-import "./style.css"
+import "./style.css";
+import isMobileOnly from "react-device-detect";
 
 
 class Character extends Component {
@@ -87,9 +88,9 @@ class Character extends Component {
                 <div key={character.Key}>
                     <div>
                         {isSelected ? (
-                            <CharacterBox image={character.Image} character={character.Name} onClick={() => this.handleClick(character)} additionalStyleClass='shake'/>
+                            <CharacterBox image={character.Image} character={character.Name} description={character.Description} onClick={() => this.handleClick(character)} additionalStyleClass='shake'/>
                         ) : (
-                                <CharacterBox image={character.Image} character={character.Name} onClick={() => this.handleClick(character)} />
+                                <CharacterBox image={character.Image} character={character.Name} description={character.Description}onClick={() => this.handleClick(character)} />
                             )
                         }
                     </div>
@@ -124,8 +125,13 @@ class Character extends Component {
             slidesToScroll: 1,
         };
 
-
-
+        if(isMobileOnly) {
+            return (
+            <div>
+                Bitte besuche uns von einem Tablet oder einem PC
+                </div>
+            )
+        }
         return (
 
             <div className='content container' >
