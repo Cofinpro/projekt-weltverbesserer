@@ -97,7 +97,7 @@ class Character extends Component {
                   character={character.Name}
                   description={character.Description}
                   onClick={() => this.handleClick(character)}
-                  additionalStyleClass="shake"
+                  additionalStyleclassName="shake"
                 />
               ) : (
                 <CharacterBox
@@ -228,42 +228,42 @@ class Character extends Component {
         <div className="container">
           <div className="content container">
             <div className="row">
-              <div class="col-sm" />
-              <div class="col-4 text-center">Prio 1</div>
-              <div class="col-sm" />
+              <div className="col-sm" />
+              <div className="col-4 text-center">Prio 1</div>
+              <div className="col-sm" />
             </div>
             <div className="row">
-              <div class="col-sm" />
-              <div class="col-4 text-center">
+              <div className="col-sm" />
+              <div className="col-4 text-center">
                 {this.renderSelectedCharacters(this.state.prio1)}
               </div>
-              <div class="col-sm">
+              <div className="col-sm">
                 {/* <img src={ArrowDown} alt="logodrei" className="arrowImages" onClick={this.handlePrioDown}/> */}
               </div>
             </div>
             <div className="row">
-              <div class="col-sm" />
-              <div class="col-4 text-center">Prio 2</div>
-              <div class="col-sm " />
+              <div className="col-sm" />
+              <div className="col-4 text-center">Prio 2</div>
+              <div className="col-sm " />
             </div>
             <div className="row">
-              <div class="col-sm" />
-              <div class="col-4 text-center">
+              <div className="col-sm" />
+              <div className="col-4 text-center">
                 {this.renderSelectedCharacters(this.state.prio2)}
               </div>
-              <div class="col-sm " />
+              <div className="col-sm " />
             </div>
             <div className="row">
-              <div class="col-sm" />
-              <div class="col-4 text-center">Prio 3</div>
-              <div class="col-sm" />
+              <div className="col-sm" />
+              <div className="col-4 text-center">Prio 3</div>
+              <div className="col-sm" />
             </div>
             <div className="row">
-              <div class="col-sm" />
-              <div class="col-4 text-center">
+              <div className="col-sm" />
+              <div className="col-4 text-center">
                 {this.renderSelectedCharacters(this.state.prio3)}
               </div>
-              <div class="col-sm">
+              <div className="col-sm">
                 {/* <img src={ArrowUp} alt="logodrei" className="arrowImages" /> */}
               </div>
             </div>
@@ -271,7 +271,7 @@ class Character extends Component {
           <row>
             <a
               href="/eigenschaften"
-              class="btn btn-outline-secondary float-right"
+              className="btn btn-outline-secondary float-right"
               role="button"
             >
               Weiter
