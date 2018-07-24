@@ -6,7 +6,7 @@ import Eigenschaften from './pages/eigenschaften-auswahl/';
 import {BrowserRouter}  from 'react-router-dom'
 import RouterWeltverbesserer from './templates/RouterWeltverbesserer.jsx';
 
-
+import "./index.css";
 
 ReactDOM.render(
 <BrowserRouter>

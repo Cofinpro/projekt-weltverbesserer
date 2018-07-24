@@ -1,11 +1,12 @@
 .character-Box{
     border: 3px dashed orange;
     margin-left: 10%;
+    padding: 24px;
   }
 
   .text-Box{
-      height:125px;
-      font-size: 3vmin;
+      font-size: 16px;
+      height: 120px;
   }
 
 .shake{
@@ -35,8 +36,4 @@
 .CharacterLabel{
     margin-top: -60px;
     
-}
-
-h1{
-font-size: initial
 }
