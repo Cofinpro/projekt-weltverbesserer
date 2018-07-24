@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Eigenschaften from './pages/eigenschaften-auswahl/';
 import {BrowserRouter}  from 'react-router-dom'
-import RouterWeltverbesserer from './templates/RouterWeltverbesserer';
+import RouterWeltverbesserer from './templates/RouterWeltverbesserer.jsx';
 
 
 
