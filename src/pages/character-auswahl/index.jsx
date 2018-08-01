@@ -2,7 +2,7 @@ import Slider from "react-slick";
 import React, { Component } from "react";
 import CharacterBox from "../../components/CharacterBoxes/CharacterBox.jsx";
 import { Characters } from "./Characters";
-import SelectedCharacterBox from "../../components/CharacterBoxes/SelectedCharacterBox";
+import SelectedCharacterBox from "../../components/CharacterBoxes/SelectedCharacterBox.jsx";
 import ArrowDown from "../../img/icon_arrow_dotted_down_orange.svg";
 import ArrowUp from "../../img/icon_arrow_dotted_up_orange.svg";
 import ImageMissingCharacter from "../../img/missing_character.png";
@@ -97,16 +97,16 @@ class Character extends Component {
                   character={character.Name}
                   description={character.Description}
                   onClick={() => this.handleClick(character)}
-                  additionalStyleclassName="shake"
+                  isSelected={isSelected}
                 />
               ) : (
-                <CharacterBox
-                  image={character.Image}
-                  character={character.Name}
-                  description={character.Description}
-                  onClick={() => this.handleClick(character)}
-                />
-              )}
+                  <CharacterBox
+                    image={character.Image}
+                    character={character.Name}
+                    description={character.Description}
+                    onClick={() => this.handleClick(character)}
+                  />
+                )}
             </div>
           </div>
         );
@@ -117,7 +117,7 @@ class Character extends Component {
   renderSelectedCharacters(selectedCharacter) {
     if (!selectedCharacter) {
       return (
-        <div className="selectedCharacters">Bitte Charakter auswählen</div>
+        <div>Bitte Charakter auswählen</div>
       );
     }
     return (
@@ -144,12 +144,6 @@ class Character extends Component {
       return <div>Bitte besuche uns von einem Tablet oder einem PC</div>;
     }
 
-    var selectedCharacters = ["test1", "test2", "test3"];
-
-    var selectedCharacters = [];
-
-    var placeholderCharacter = ["", "", ""];
-
     return (
       <div>
         <div className="container-fluid">
@@ -166,118 +160,63 @@ class Character extends Component {
           </div>
           <div className="row margin-40-top">
             <div className="col-12 col-md-3 text-center">
-              {selectedCharacters.length === 0 && (
-                <div className="row">
-                  <div className="col-12">
-                    <p>Noch nichts ausgewählt</p>
-                    <hr />
-                  </div>
-                  <div className="col-12">
-                    {selectedCharacters.map(function(character, i) {
-                      return (
-                        <div key={i} className="row justify-content-center">
-                          <div className="col-12">
-                            <p>Character 1</p>
-                          </div>
-                          <div className="col-12 col-md-6">
-                            <img
-                              src={ImageMissingCharacter}
-                              className="img-fluid"
-                            />
-                            <hr />
-                          </div>
-                        </div>
-                      );
-                    })}
-                    {placeholderCharacter.map(function(character, i) {
-                      let diff =
-                         placeholderCharacter.length - selectedCharacters.length;
 
-                      if (
-                        selectedCharacters.length - placeholderCharacter.length
-                      )
-
-                      if (i < diff) {
-                        return (
-                          <div key={i} className="row justify-content-center">
-                            <div className="col-12">
-                              <p>{"Character " + i}</p>
-                            </div>
-                            <div className="col-12 col-md-6">
-                              <img
-                                src={ImageMissingCharacter}
-                                className="img-fluid"
-                              />
-                              <hr />
-                            </div>
-                          </div>
-                        );
-                      } else {
-                        return null;
-                      }
-                    })}
+              <div className="row">
+                <div className="col-12">
+                  <hr />
+                </div>
+                <div className="col-12">
+                  <div className="row justify-content-center">
+                    <div className="col-12">
+                      <p>{"Character 1"}</p>
+                    </div>
+                    <div className="col-12 col-md-6">
+                      {this.renderSelectedCharacters(this.state.prio1)}
+                      <hr />
+                    </div>
                   </div>
                 </div>
-              )}
+                <div className="col-12">
+                  <div className="row justify-content-center">
+                    <div className="col-12">
+                      <p>{"Character 2"}</p>
+                    </div>
+                    <div className="col-12 col-md-6">
+                      {this.renderSelectedCharacters(this.state.prio2)}
+                      <hr />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-12">
+                  <div className="row justify-content-center">
+                    <div className="col-12">
+                      <p>{"Character 3"}</p>
+                    </div>
+                    <div className="col-12 col-md-6">
+                      {this.renderSelectedCharacters(this.state.prio3)}
+                      <hr />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
             <div className="col-12 col-md-9">
               <Slider {...settings}>{this.renderCharacters()}</Slider>
             </div>
           </div>
         </div>
-        <div className="container">
-          <div className="content container">
-            <div className="row">
-              <div className="col-sm" />
-              <div className="col-4 text-center">Prio 1</div>
-              <div className="col-sm" />
-            </div>
-            <div className="row">
-              <div className="col-sm" />
-              <div className="col-4 text-center">
-                {this.renderSelectedCharacters(this.state.prio1)}
-              </div>
-              <div className="col-sm">
-                {/* <img src={ArrowDown} alt="logodrei" className="arrowImages" onClick={this.handlePrioDown}/> */}
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-sm" />
-              <div className="col-4 text-center">Prio 2</div>
-              <div className="col-sm " />
-            </div>
-            <div className="row">
-              <div className="col-sm" />
-              <div className="col-4 text-center">
-                {this.renderSelectedCharacters(this.state.prio2)}
-              </div>
-              <div className="col-sm " />
-            </div>
-            <div className="row">
-              <div className="col-sm" />
-              <div className="col-4 text-center">Prio 3</div>
-              <div className="col-sm" />
-            </div>
-            <div className="row">
-              <div className="col-sm" />
-              <div className="col-4 text-center">
-                {this.renderSelectedCharacters(this.state.prio3)}
-              </div>
-              <div className="col-sm">
-                {/* <img src={ArrowUp} alt="logodrei" className="arrowImages" /> */}
-              </div>
-            </div>
-          </div>
-          <row>
-            <a
-              href="/eigenschaften"
-              className="btn btn-outline-secondary float-right"
-              role="button"
-            >
-              Weiter
+
+        <row>
+          <a
+            href="/eigenschaften"
+            className="btn btn-outline-secondary float-right"
+            role="button"
+          >
+            Weiter
             </a>
-          </row>
-        </div>
+        </row>
+
       </div>
     );
   }
