@@ -209,7 +209,7 @@ class Character extends Component {
 
         <row>
           <a
-            href="/eigenschaften"
+            href="/Eigenschaften"
             className="btn btn-outline-secondary float-right"
             role="button"
           >

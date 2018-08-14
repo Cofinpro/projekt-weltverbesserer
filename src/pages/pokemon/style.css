@@ -1,0 +1,29 @@
+.change {
+    display: block;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    animation: Ash-walking 0.7s;
+    animation-iteration-count: 5; 
+    width: 96px; /* Width of new image */
+    height: 119px; /* Height of new image */
+     /* Equal to width of new image */
+  }
+
+  @keyframes Ash-walking {
+    0% { background: url(../../img/ash_linksvor.png) no-repeat; padding-left: 96px;}
+    25% { background: url(../../img/ash_normal.png) no-repeat; padding-left: 96px;}
+    50% { background: url(../../img/ash_rechtsvor.png) no-repeat; padding-left: 96px;}
+    75% { background: url(../../img/ash_normal.png) no-repeat; padding-left: 96px;}
+    100% { background: url(../../img/ash_linksvor.png) no-repeat; padding-left: 96px;}
+  }
+
+  .pokeball {
+    background-image: url(../../img/Pokeball_cool.png);
+    background-repeat: no-repeat;
+    background-size: cover;      
+  }
+
+  .top-buffer { 
+    margin-top:100px; 
+  }
+
