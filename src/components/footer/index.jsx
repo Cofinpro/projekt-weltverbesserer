@@ -66,6 +66,9 @@ class Footer extends React.Component {
             </div>
           </div>
         </div>
+        <div class="row float-right">
+                <a href='https://www.freepik.com/free-vector/businessmen-with-a-rocket_1076087.htm'>Designed by Freepik</a>
+              </div>
       </div>
     </footer>
     );
