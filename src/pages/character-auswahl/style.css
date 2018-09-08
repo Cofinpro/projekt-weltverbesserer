@@ -1,15 +1,13 @@
-.selectedCharacters {
-  
-  margin-top: 10px;
+.col-12 {
+  position: relative;
 }
-
-.arrowImages{
-  vertical-align: bottom;
+.switch {
+  position: absolute;
+  margin-top: -2.5em;
+  cursor: pointer;
 }
-.arrowUpImages{
-  vertical-align: 100px;
-  border: 3px dashed orange;
-}
-.arrowDownImages{
-  vertical-align: 1000px;
+.switch > .icon {
+  font-size: 3em;
+  line-height: 1em;
+  color: #e67e22;
 }

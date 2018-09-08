@@ -10,11 +10,11 @@ class App extends Component {
       <div>
         <div className="App">
         <CharacterLabels/>
-          <img src={businessman} class="img-circle" alt="logodrei" width="304" height="236"/>
+          <img src={businessman} className="img-circle" alt="logodrei" width="304" height="236"/>
           <Box/>
         </div>             
       <row>
-          <a href="/eigenschaften" class="btn btn-outline-secondary float-right" role="button">Weiter</a>
+          <a href="/eigenschaften" className="btn btn-outline-secondary float-right" role="button">Weiter</a>
         </row>
       </div>
     );

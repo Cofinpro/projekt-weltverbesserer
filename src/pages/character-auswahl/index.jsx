@@ -3,9 +3,6 @@ import React, { Component } from "react";
 import CharacterBox from "../../components/CharacterBoxes/CharacterBox.jsx";
 import { Characters } from "./Characters";
 import SelectedCharacterBox from "../../components/CharacterBoxes/SelectedCharacterBox.jsx";
-import ArrowDown from "../../img/icon_arrow_dotted_down_orange.svg";
-import ArrowUp from "../../img/icon_arrow_dotted_up_orange.svg";
-import ImageMissingCharacter from "../../img/missing_character.png";
 import "./style.css";
 import isMobileOnly from "react-device-detect";
 
@@ -13,73 +10,34 @@ class Character extends Component {
   constructor(props) {
     super(props);
 
-    var characters = [
-      Characters.Planer,
-      Characters.Visionaer,
-      Characters.Macher,
-      Characters.Kommunikator,
-      Characters.Checker,
-      Characters.Energiebuendel
-    ];
+    var characters = Characters;
+    var characterSelection = new CharacterSelection();
 
     this.state = {
-      prio1: null,
-      prio2: null,
-      prio3: null,
+      selection: characterSelection,
       characters: characters
-    };
+    };    
   }
 
-  handleClick(toSetPrio) {
-    if (this.characterIsSelected(toSetPrio)) {
-      return;
-    }
-    if (!this.state.prio1) {
-      this.setState({ prio1: toSetPrio });
-      return;
-    }
-    if (!this.state.prio2) {
-      this.setState({ prio2: toSetPrio });
-      return;
-    }
-    if (!this.state.prio3) {
-      this.setState({ prio3: toSetPrio });
-      return;
+  addCharacter(character) {
+    let i = 0;
+    while (i < this.state.selection.getSelection().length) {
+      if (!this.state.selection.getCharacter(i)) {
+        this.state.selection.setCharacter(character, i);
+        return this.setState(this.state);
+      }
+      i++;
     }
   }
 
-  characterIsSelected(character) {
-    return (
-      character === this.state.prio1 ||
-      character === this.state.prio2 ||
-      character === this.state.prio3
-    );
-  }
-
-  removeSelectedCharacter(toRemove) {
-    if (toRemove === this.state.prio1) {
-      this.setState({ prio1: null }, () => this.orderPrios());
-    }
-
-    if (toRemove === this.state.prio2) {
-      this.setState({ prio2: null }, () => this.orderPrios());
-    }
-
-    if (toRemove === this.state.prio3) {
-      this.setState({ prio3: null }, () => this.orderPrios());
-    }
-  }
-
-  orderPrios() {
-    if (!this.state.prio1) {
-      this.setState({ prio1: this.state.prio2 });
-      this.setState({ prio2: this.state.prio3 });
-      this.setState({ prio3: null });
-    }
-
-    if (!this.state.prio2) {
-      this.setState({ prio2: this.state.prio3 });
-      this.setState({ prio3: null });
+  removeSelectedCharacter(character) {
+    let i = 0;
+    while (i < this.state.selection.getSelection().length) {
+      if (this.state.selection.getCharacter(i) === character) {
+        this.state.selection.setCharacter(null, i);
+        return this.setState(this.state);
+      }
+      i++;
     }
   }
 
@@ -87,26 +45,17 @@ class Character extends Component {
     var characters = this.state.characters
       .sort((a, b) => a.Key - b.Key)
       .map(character => {
-        const isSelected = this.characterIsSelected(character);
+        const isSelected = this.state.selection.hasCharacter(character);
         return (
           <div key={character.Key}>
             <div>
-              {isSelected ? (
-                <CharacterBox
-                  image={character.Image}
-                  character={character.Name}
-                  description={character.Description}
-                  onClick={() => this.handleClick(character)}
-                  isSelected={isSelected}
-                />
-              ) : (
-                  <CharacterBox
-                    image={character.Image}
-                    character={character.Name}
-                    description={character.Description}
-                    onClick={() => this.handleClick(character)}
-                  />
-                )}
+              <CharacterBox
+                image={character.Image}
+                character={character.Name}
+                description={character.Description}
+                onClick={() => this.addCharacter(character)}
+                isSelected={isSelected}
+              />
             </div>
           </div>
         );
@@ -114,7 +63,7 @@ class Character extends Component {
     return characters;
   }
 
-  renderSelectedCharacters(selectedCharacter) {
+  renderSelectedCharacters(selectedCharacter) {    
     if (!selectedCharacter) {
       return (
         <div>Bitte Charakter auswählen</div>
@@ -129,6 +78,13 @@ class Character extends Component {
         />
       </div>
     );
+  }
+
+  changePrio(prio1, prio2) {
+    const characterHigherPrio = this.state.selection.getCharacter(prio1);
+    const characterLowerPrio = this.state.selection.getCharacter(prio2);
+    this.state.selection.setCharacter(characterLowerPrio, prio1);
+    this.state.selection.setCharacter(characterHigherPrio, prio2);
   }
 
   render() {
@@ -160,7 +116,6 @@ class Character extends Component {
           </div>
           <div className="row margin-40-top">
             <div className="col-12 col-md-3 text-center">
-
               <div className="row">
                 <div className="col-12">
                   <hr />
@@ -171,10 +126,11 @@ class Character extends Component {
                       <p>{"Character 1"}</p>
                     </div>
                     <div className="col-12 col-md-6">
-                      {this.renderSelectedCharacters(this.state.prio1)}
+                      { this.renderSelectedCharacters(this.state.selection.getCharacter(0))}
                       <hr />
                     </div>
                   </div>
+                  <div className="switch" onClick={() => this.changePrio(0, 1)}><i className="icon fa fa-arrows-v"></i></div>
                 </div>
                 <div className="col-12">
                   <div className="row justify-content-center">
@@ -182,10 +138,11 @@ class Character extends Component {
                       <p>{"Character 2"}</p>
                     </div>
                     <div className="col-12 col-md-6">
-                      {this.renderSelectedCharacters(this.state.prio2)}
+                      {this.renderSelectedCharacters(this.state.selection.getCharacter(1))}
                       <hr />
                     </div>
                   </div>
+                  <div className="switch" onClick={() => this.changePrio(1, 2)}><i className="icon fa fa-arrows-v"></i></div>
                 </div>
                 <div className="col-12">
                   <div className="row justify-content-center">
@@ -193,7 +150,7 @@ class Character extends Component {
                       <p>{"Character 3"}</p>
                     </div>
                     <div className="col-12 col-md-6">
-                      {this.renderSelectedCharacters(this.state.prio3)}
+                      {this.renderSelectedCharacters(this.state.selection.getCharacter(2))}
                       <hr />
                     </div>
                   </div>
@@ -207,7 +164,7 @@ class Character extends Component {
           </div>
         </div>
 
-        <row>
+        <div>
           <a
             href="/Eigenschaften"
             className="btn btn-outline-secondary float-right"
@@ -215,10 +172,29 @@ class Character extends Component {
           >
             Weiter
             </a>
-        </row>
+        </div>
 
       </div>
     );
+  }
+}
+
+class CharacterSelection {
+  selection = [null, null, null];
+
+  constructor() {}
+
+  getCharacter(prio) {
+    return this.selection[prio];
+  }
+  setCharacter(character, prio) {
+    this.selection[prio] = character;
+  }
+  getSelection() {
+    return this.selection;
+  }
+  hasCharacter(character) {
+    return this.selection.includes(character);
   }
 }
 
