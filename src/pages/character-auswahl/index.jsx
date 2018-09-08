@@ -80,11 +80,12 @@ class Character extends Component {
     );
   }
 
-  changePrio(prio1, prio2) {
+  changePrio(prio1, prio2) {    
     const characterHigherPrio = this.state.selection.getCharacter(prio1);
     const characterLowerPrio = this.state.selection.getCharacter(prio2);
     this.state.selection.setCharacter(characterLowerPrio, prio1);
     this.state.selection.setCharacter(characterHigherPrio, prio2);
+    this.setState(this.state);
   }
 
   render() {
