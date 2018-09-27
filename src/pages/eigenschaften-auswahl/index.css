@@ -17,3 +17,25 @@
 .margin-50-top {
   margin-top: 50px;
   } 
+
+  .margin-10-top {
+    margin-top: 10px;
+    } 
+
+    .margin-300-top {
+      margin-top: 300px;
+      } 
+
+  .margin-500-top {
+    margin-top: 700px;
+    } 
+
+  .text-deko{
+    text-decoration: none; 
+    color: black;
+  }
+
+  .position{
+    position:fixed;
+
+  }

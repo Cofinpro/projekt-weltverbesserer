@@ -8,9 +8,17 @@ import Layout from "../components/layout/index.jsx"
 import AGB from "../pages/agb/"
 import Impressum from "../pages/impressum"
 import Datenschutz from "../pages/datenschutz"
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks
+} from "body-scroll-lock"
+
 
 class RouterWeltverbesserer extends Component {
   render() {
+    const bodyScrollLock = require("body-scroll-lock");
+    bodyScrollLock.enableBodyScroll(this);
 
     return (
       <main>

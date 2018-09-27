@@ -3,7 +3,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     animation: Ash-walking 0.7s;
-    animation-iteration-count: 5; 
+    animation-iteration-count: 100; 
     width: 96px; /* Width of new image */
     height: 119px; /* Height of new image */
      /* Equal to width of new image */

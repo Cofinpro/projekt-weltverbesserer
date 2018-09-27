@@ -1,0 +1,12 @@
+.bg { 
+  /* The image used */
+  background-image: url(../../img/medien-thesenpapiere-a26.jpg);
+
+  /* Full height */
+  height: 120%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

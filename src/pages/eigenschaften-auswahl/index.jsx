@@ -3,69 +3,82 @@ import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap.css";
 import React from "react";
 import ReactDOM from "react-dom";
-import Tooltip from "rc-tooltip";
-import Slider from "rc-slider";
 import "bootstrap/dist/css/bootstrap.min.css";
 import eigenschaften_image from "../../img/eigenschaften_image.jpg";
+import ScrollableAnchor from "react-scrollable-anchor";
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks
+} from "body-scroll-lock";
+import ThumbsOkay from '../../img/Thumb_okay.jpeg';
+import ThumbsPasst from '../../img/Thumb_passt.jpeg';
+import ThumbsSchlecht from '../../img/Thumb_schlecht.jpeg';
+import Ash from '../../img/ash_normal.png';
 
-const createSliderWithTooltip = Slider.createSliderWithTooltip;
-const Handle = Slider.Handle;
+const bodyScrollLock = require("body-scroll-lock");
+var FontAwesome = require('react-fontawesome');
 
-const handle = props => {
-  const { value, dragging, index, ...restProps } = props;
+
+function EigenschaftenFrage(props) {
+
+
+ // bodyScrollLock.disableBodyScroll(this);
   return (
-    <Tooltip
-      prefixCls="rc-slider-tooltip"
-      overlay={value}
-      visible={dragging}
-      placement="top"
-      key={index}
-    >
-      <Handle value={value} {...restProps} />
-    </Tooltip>
-  );
-};
-
-function NameSlider(props) {
-  return (
-    <div class="row margin-50-top">
-      <div class="col-sm-1" />
-      <div class="col-sm-8">
-        <div class="row">
-          <div class="col-sm-7" />
-          <div class="col-sm-5">
-            <div class="row">
-              <div class="col-sm-2 text-center">
-                <p>keine Angabe</p>
-              </div>
-              <div class="col-sm-2 text-center">
-                <p>trifft nicht zu</p>
-              </div>
-              <div class="col-sm-2 text-center">
-                <p>trifft minimal zu</p>
-              </div>
-              <div class="col-sm-2 text-center">
-                <div>
-                  <p>trifft halbw. zu</p>
-                </div>
-              </div>
-              <div class="col-sm-2 text-center">
-                <div>
-                  <p>trifft größt. zu</p>
-                </div>
-              </div>
-              <div class="col-sm-2 text-center">
-                <div>
-                  <p>trifft zu</p>
-                </div>
-              </div>
+    <div>
+      <div class={"row " + props.content.MarginTop}>
+        <div class="col-sm-3" />
+        <div class="col-sm-6">
+          <div class="row">
+            <ScrollableAnchor id={props.content.section}>
+              <div />
+            </ScrollableAnchor>
+            <div class="col-sm-12 text-center margin-300-top">
+              {props.content.frage}
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-7 text-center">{props.content.frage}</div>
-          <div class="col-sm-5">
-            <Slider min={0} max={5} defaultValue={0} handle={handle} />
+        <div class="col-sm-3"/>
+      </div>
+      <div class="row margin-50-top">
+        <div class="col-sm-2 d-flex justify-content-center">
+        <a href={props.content.backSection} class="text-deko"> 
+        <FontAwesome name='angle-up' />
+        </a>
+        <div>
+        </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-sm-2 text-center">
+              <a href={props.content.nextSection} class="text-deko">
+                keine Angabe
+              </a>
+            </div>
+            <div class="col-sm-2 text-center">
+              <a href={props.content.nextSection} class="text-deko">
+                trifft nicht zu
+              </a>
+            </div>
+            <div class="col-sm-2 text-center">
+              <a href={props.content.nextSection} class="text-deko">
+                trifft minimal zu
+              </a>
+            </div>
+            <div class="col-sm-2 text-center">
+              <div>
+                <a href={props.content.nextSection} class="text-deko">
+                  trifft größt. zu
+                </a>
+              </div>
+            </div>
+            <div class="col-sm-2 text-center">
+              <div>
+                <a href={props.content.nextSection} class="text-deko">
+                  trifft zu
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -77,140 +90,195 @@ const wrapperStyle = { width: 400, margin: 50 };
 class Eigeschaften extends React.Component {
   render() {
     return (
-      <div>
-        <div class="text-center">
-          <img
-            src={eigenschaften_image}
-            class="img-circle"
-            width="304"
-            height="236"
-          />
-        </div>
-
-        <div className="col text-center top-buffer">
-          <h2 className="h4 padding-sm-bottom">
-            Folgende Eigenschaften beschreiben mich
-          </h2>
-        </div>
-        <NameSlider
-          content={{
-            frage:
-              "Gegenüber anderen Menschen bin ich in der Regel freundlich und zuvorkommend"
-          }}
-        />
-
-        <NameSlider
-          content={{
-            frage:
-              "Ein Berater muss auch mit Leuten zusammenarbeiten, deren Meinung er nicht teilt"
-          }}
-        />
-
-          <NameSlider
-          content={{
-            frage:
-              "Wenn jemand einen Vorschlag von mir kritisiert, bin ich schnell verunsichert"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Selbständigkeit ist mir persönlich wichtig"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Mich hält es nie lange an einem Ort, ich brauche Abenteuer"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Wenn andere von meiner Arbeit etwas haben finde ich das cool"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Gewissenhaftes Arbeiten ist für mich ganz natürlich"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Ich kann schon mal mit einer Notlüge leben"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Wenn ich über eine Sache ungefähr Bescheid weiss, dann reicht mir das. Den Rest lerne ich dann schon irgendwie"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Vor anderen zu präsentieren macht mir richtig Spaß"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Wenn ich ein Problem habe, das ich nicht lösen kann, dann beisse ich mich da so richtig rein"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Bevor ich etwas falsch mache, frage ich lieber mal um Hilfe"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Pünktlichkeit ist das halbe Leben"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Ich stehe auch mal für eine Freundin ein obwohl ich eigentlich nichts falsch gemacht hab"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Ich stehe anderen gerne mit Rat und Tat zu Seite"
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Ich bin auch mal bereit die 'extra mile' zu laufen "
-          }}
-        />
-
-            <NameSlider
-          content={{
-            frage:
-              "Spaß bei der Arbeit steht für mich im Vordergrund"
-          }}
-        />
+      
+        <div class="row">
+      <div class="col-sm-1 position">
+          {/* <img
+              src={Ash}
+              alt="pic not found"
+              className={"d-block mx-auto change position"}
+            /> */}
       </div>
+
+      <div class="col-sm-11">
+        <EigenschaftenFrage
+          content={{
+            frage:
+              "Ich kann auch gut mit Menschen auskommen / Menschen respektieren, selbst wenn unsere Ansichten weit auseinander liegen.",
+            nextSection: "#section2",
+            section: "section1",
+            MarginTop: "margin-10-top",
+            backSection:"#section1"
+          }}
+        />
+
+        <EigenschaftenFrage
+          content={{
+            frage:
+              "Ich sage offen meine Meinung und verstehe Kritik als Chance zur Verbesserung.",
+            nextSection: "#section3",
+            section: "section2",
+            MarginTop: "margin-500-top",
+            backSection:"#section1"
+          }}
+        />
+
+        <EigenschaftenFrage
+          content={{
+            frage:
+              "Erfolg auf Kosten anderer sollte eine Ausnahme bleiben.",
+            nextSection: "#section4",
+            section: "section3",
+            MarginTop: "margin-500-top",
+            backSection:"#section2"
+          }}
+        />
+
+        <EigenschaftenFrage
+          content={{
+            frage:
+              "Clean Code und wartbarer Code sind mir wichtiger als ein schnelles Ergebnis.",
+            nextSection: "#section5",
+            section: "section4",
+            MarginTop: "margin-500-top",
+            backSection:"#section3"
+          }}
+        />
+
+        <EigenschaftenFrage
+          content={{
+            frage:
+              "Eine durchdachte Technologieauswahl und Architektur sind wichtig für erfolgreiche Softwareentwicklung.",
+            nextSection: "#section6",
+            section: "section5",
+            MarginTop: "margin-500-top",
+            backSection:"#section4"
+          }}
+        />
+
+        <EigenschaftenFrage
+          content={{
+            frage:
+              "Ich fühle mich in der Welt von JavaEE und den aktuellen Webtechnologien wie Angular Zuhause.",
+            nextSection: "#section7",
+            section: "section6",
+            MarginTop: "margin-500-top",
+            backSection:"#section5"
+          }}
+        />
+
+          <EigenschaftenFrage
+          content={{
+            frage:
+              "Manchmal fühle ich mich wie ein Übersetzer von Techie-Sprech zu Hochdeutsch.",
+            nextSection: "#section8",
+            section: "section7",
+            MarginTop: "margin-500-top",
+            backSection:"#section6"
+          }}
+        />
+
+          <EigenschaftenFrage
+          content={{
+            frage:
+              "Ich habe Spaß daran, gemeinsam zu entwickeln und mich mit anderen über die Arbeit auszutauschen. Dabei kann ich durchaus noch etwas von erfahrenen Entwicklern lernen und anderen helfen.",
+            nextSection: "#section9",
+            section: "section8",
+            MarginTop: "margin-500-top",
+            backSection:"#section7"
+          }}
+        />
+
+          <EigenschaftenFrage
+          content={{
+            frage:
+              "Zur Beratung gehört für mich, dass ich mich den Gegebenheiten des Kunden anpasse. Da komme ich auch mit Anzug oder Kostüm zur Arbeit.",
+            nextSection: "#section10",
+            section: "section9",
+            MarginTop: "margin-500-top",
+            backSection:"#section8"
+          }}
+        />
+
+          <EigenschaftenFrage
+          content={{
+            frage:
+              "Ich nehme die Dinge in die Hand, löse selbstständig Probleme und fühle mich für das gesamte Ergebnis verantwortlich.",
+            nextSection: "#section11",
+            section: "section10",
+            MarginTop: "margin-500-top",
+            backSection:"#section9"
+          }}
+        />
+
+         <EigenschaftenFrage
+          content={{
+            frage:
+              "Die Finanzwelt und ihre akuellen Trends (bspw. Digitalisierung) finde ich spannend.",
+            nextSection: "#section12",
+            section: "section11",
+            MarginTop: "margin-500-top",
+            backSection:"#section10"
+          }}
+        />
+
+         <EigenschaftenFrage
+          content={{
+            frage:
+              "Ich beschäftige mich gerne mit den aktuellen Technologien und Frameworks und bin erst dann richtig zufrieden, wenn ich sie selbst ausprobieren konnte.",
+            nextSection: "#section13",
+            section: "section12",
+            MarginTop: "margin-500-top",
+            backSection:"#section11"
+          }}
+        />
+
+         <EigenschaftenFrage
+          content={{
+            frage:
+              "Webdesign, Frontend, App-Entwicklung, das ist genau mein Ding.",
+            nextSection: "#section14",
+            section: "section13",
+            MarginTop: "margin-500-top",
+            backSection:"#section12"
+          }}
+        />
+
+         <EigenschaftenFrage
+          content={{
+            frage:
+              "Ich bin Fullstack Entwickler und stelle mich jeder Herausforderung.",
+            nextSection: "#section15",
+            section: "section14",
+            MarginTop: "margin-500-top",
+            backSection:"#section13"
+          }}
+        />
+
+         <EigenschaftenFrage
+          content={{
+            frage:
+              "Datenbanken, Services, Algorithmen, da macht mir so schnell keiner was vor.",
+            nextSection: "#section16",
+            section: "section15",
+            MarginTop: "margin-500-top",
+            backSection:"#section14"
+          }}
+        />
+
+         <EigenschaftenFrage
+          content={{
+            frage:
+              "In meiner Heimat fühle ich mich wohl, viel unterwegs sein ist nicht so mein Ding.",
+            nextSection: "#section16",
+            section: "section16",
+            MarginTop: "margin-500-top",
+            backSection:"#section15"
+          }}
+        />
+        </div>
+      </div>
+      
     );
   }
 }
