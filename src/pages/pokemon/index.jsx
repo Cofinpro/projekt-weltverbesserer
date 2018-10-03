@@ -5,6 +5,7 @@ import Pokeball from '../../img/Pokeball.png';
 import Pokemon from 'pokemon-images';
 import Slider from "rc-slider";
 import "./style.css";
+import axios from 'axios';
 
 
 
@@ -30,6 +31,19 @@ class PokemonPage extends Component {
       pokemonsToShow: [...this.state.pokemonsToShow, Pokemon.getSprite("blastoise")]
     })
   }
+
+}
+
+sendMail() {
+  axios.post(
+    './sendMail.php',{
+      data: {
+        name: 'jessie',
+        time: '12:00',
+        food: 'milk',
+        nutrition: 'vitaminA'
+      }
+    })
 
 }
 
@@ -98,6 +112,9 @@ render() {
           </div>
         </div>
       </div>
+      <div>
+      <button type="button" className="btn inputsm" onClick={() => this.sendMail()}>Email an Himsl</button>
+        </div>
     </div>
 
   )
